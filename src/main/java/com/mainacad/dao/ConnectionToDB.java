@@ -12,6 +12,7 @@ class ConnectionToDB {
 	private static final String PASSWORD = "248842";
 
 	static Connection getConnection() {
+		
 		Connection connection = null;
 		try {
 			Class.forName("org.postgresql.Driver");
