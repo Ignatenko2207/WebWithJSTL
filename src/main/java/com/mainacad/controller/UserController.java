@@ -13,6 +13,7 @@ import com.mainacad.dao.UserDAO;
 import com.mainacad.model.User;
 import com.mainacad.service.UserService;
 
+@SuppressWarnings("serial")
 @WebServlet(urlPatterns = "/user")
 public class UserController extends HttpServlet {
 
@@ -28,16 +29,16 @@ public class UserController extends HttpServlet {
             String password = req.getParameter("password");
 
             User user = UserService.getByLoginAndPassword(login, password);
+            RequestDispatcher dispatcher;
             if (user!=null){
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
+                dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
                 req.setAttribute("user", user);
-                dispatcher.forward(req, resp);
             }
             else{
-                RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");
-                req.setAttribute("error-msg", "Login or password are wrong!");
-                dispatcher.forward(req, resp);
+                dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");
+                req.setAttribute("errorMsg", "Login or password are wrong!");
             }
+            dispatcher.forward(req, resp);
         } else if(action.equals("register")){
             String login = req.getParameter("login");
             String password = req.getParameter("password");
@@ -50,17 +51,15 @@ public class UserController extends HttpServlet {
             User savedUser = UserDAO.save(user);
             RequestDispatcher dispatcher;
             if (savedUser.getId() != null) {
-            	dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
+            	dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
                 req.setAttribute("user", savedUser);
 			} 
             else {
-            	dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
-			}
+            	dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
+            	req.setAttribute("errorMsg", "Login or password are wrong!");
+            }
             dispatcher.forward(req, resp);
         }
-
-
-
     }
 
 }

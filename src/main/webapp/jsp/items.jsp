@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h3>Hello, ${user.firstName} ${user.login}</h3>
+<h3>Hello, <c:out value="${user.firstName} ${user.lastName}" /></h3>
 
 </body>
 </html>
