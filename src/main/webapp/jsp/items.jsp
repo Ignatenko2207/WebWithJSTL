@@ -8,5 +8,9 @@
 
 <h3>Hello, <c:out value="${user.firstName} ${user.lastName}" /></h3>
 
+<br>
+<c:forEach items="itemsCollection" var="item"> </c:forEach>
+ 
+ <c:out value="${item.name} ${item.price}"></c:out>
 </body>
 </html>
