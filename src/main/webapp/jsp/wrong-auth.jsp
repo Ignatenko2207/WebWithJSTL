@@ -1,18 +1,24 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <html>
 <head>
 <title>My web application</title>
 </head>
 <body>
-	<h2>Login or password are wrong! Input correct values, please!</h2>
+	<h2><c:out value="${err}"/></h2>
 	<br>
-	<form action="user" method="post">
-		<input type="text" name="action" value="login" hidden> 
-	
-		<input type="text" size="40" name="login" placeholder="Input login" required>
-		<br> 
-		<input type="password" size="40" name="password"
-			placeholder="Input password" required> <br> <input
-			type="submit">
-	</form>
+
+    <form action="user" method="post">
+        <input type="text" name="action" value="login" hidden>
+        <input type="text" size="40" name="login" placeholder="Input login" required>
+        <br>
+        <input type="password" size="40" name="password" placeholder="Input password" required>
+        <br>
+        <input type="submit" value="LOGIN">
+    </form>
+<br>
+    <h3>
+        <a href="/WebWithJSTLMA45/jsp/registration.jsp">REGISTER NEW USER</a>
+    </h3>
 </body>
 </html>

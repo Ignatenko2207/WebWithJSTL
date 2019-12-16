@@ -10,6 +10,7 @@ class ConnectionToDB {
 	private static final String URL = "jdbc:postgresql://localhost:5432/e_shop";
 	private static final String USER = "postgres";
 	private static final String PASSWORD = "ghbdtn";
+	
 
 	static Connection getConnection() {
 		
