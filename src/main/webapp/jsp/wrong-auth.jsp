@@ -5,7 +5,7 @@
 <title>My web application</title>
 </head>
 <body>
-	<h2><c:out value="${err}"/></h2>
+	<h2><c:out value="${errorMsg}"/></h2>
 	<br>
 
     <form action="user" method="post">
