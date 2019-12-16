@@ -1,6 +1,7 @@
 package com.mainacad.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mainacad.dao.ItemDAO;
 import com.mainacad.dao.UserDAO;
+import com.mainacad.model.Item;
 import com.mainacad.model.User;
 import com.mainacad.service.UserService;
 
@@ -31,8 +34,10 @@ public class UserController extends HttpServlet {
             User user = UserService.getByLoginAndPassword(login, password);
             RequestDispatcher dispatcher;
             if (user!=null){
+            	List<Item> items = ItemDAO.findAll();
                 dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
                 req.setAttribute("user", user);
+                req.setAttribute("itemCollection", items);
             }
             else{
                 dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");

@@ -17,7 +17,7 @@
 		<junit.version>5.5.2</junit.version>
 		<lombok.version>1.18.10</lombok.version>
 		<postgres.jdbc.version>42.2.8</postgres.jdbc.version>
-
+		<commons-dbcp.version>1.4</commons-dbcp.version>
 		<servlet.version>4.0.1</servlet.version>
 	</properties>
 
@@ -57,6 +57,13 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>${servlet.version}</version>
+		</dependency>
+
+		<!-- Apache Commons dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
 		</dependency>
 
 		<!-- JSTL -->
