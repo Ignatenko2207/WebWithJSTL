@@ -9,4 +9,9 @@ public class UserService {
 		return UserDAO.getByLoginAndPassword(login, password);
 	}
 	
+	public static User getById(Integer id) {
+		return UserDAO.getById(id);
+	}
+	
+	
 }

@@ -138,4 +138,26 @@ public class OrderDAO {
             e.printStackTrace();
         }
     }
+
+    // TODO test
+    public static Order updateAmount(Order order, Integer amount) {
+        String sql = "UPDATE orders SET " +
+                "amount=? "+
+                "WHERE id = ?";
+        try ( Connection connection = ConnectionToDB.getConnection();
+              PreparedStatement preparedStatement =
+                      connection.prepareStatement(sql)
+        ) {
+            preparedStatement.setInt(1, amount);
+            preparedStatement.setInt(2, order.getId());
+
+            int result = preparedStatement.executeUpdate();
+            if (result == 1) {
+                return order;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

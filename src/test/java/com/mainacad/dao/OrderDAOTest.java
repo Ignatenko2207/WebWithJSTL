@@ -164,4 +164,36 @@ class OrderDAOTest {
         Order deletedOrder = OrderDAO.getById(targetOrder.getId());
         assertNull(deletedOrder);
     }
+    
+
+    @Test
+    void updateAmount() {
+    	User user = new User("login", "pass", "first_name", "last_name", "email", "phone");
+        UserDAO.save(user);
+        users.add(user);
+        assertNotNull(user.getId());
+
+        Cart cart = new Cart(Status.OPEN, user, CURRENT_TIME);
+        CartDAO.save(cart);
+        carts.add(cart);
+        assertNotNull(cart.getId());
+
+        Item item = new Item("name", "code", 50, 500);
+        ItemDAO.save(item);
+        items.add(item);
+        assertNotNull(item.getId());
+
+        Order order = new Order(item, cart, 50);
+        OrderDAO.save(order);
+        orders.add(order);
+        assertNotNull(order.getId());
+
+        Integer amount=100; 
+        order.setAmount(amount);
+        OrderDAO.updateAmount(order, amount);
+        Order targetOrder = OrderDAO.getById(order.getId());
+        assertNotNull(targetOrder);
+        
+        assertEquals(100, targetOrder.getAmount());
+    }
 }
