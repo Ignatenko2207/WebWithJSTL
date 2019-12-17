@@ -38,14 +38,12 @@ public class UserDAO {
                     user.setId(id);
                     break;
                 }
-            }
-            else {
-                return null;
+                return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     public static List<User> getAll() {
@@ -63,7 +61,7 @@ public class UserDAO {
                         resultSet.getString("password"),
                         resultSet.getString("first_name"),
                         resultSet.getString("last_name"),
-                        resultSet.getString("email"),
+                        resultSet.getString("e_mail"),
                         resultSet.getString("phone")
                 );
                 users.add(user);

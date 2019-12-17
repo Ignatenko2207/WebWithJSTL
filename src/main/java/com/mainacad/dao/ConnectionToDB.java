@@ -5,11 +5,10 @@ import java.sql.DriverManager;
 import java.util.logging.Logger;
 
 class ConnectionToDB {
-
 	private static final Logger LOG = Logger.getLogger(ConnectionToDB.class.getName());
-	private static final String URL = "jdbc:postgresql://localhost:5432/e_shop";
+	private static final String URL = "jdbc:postgresql://localhost:5433/e_shop";
 	private static final String USER = "postgres";
-	private static final String PASSWORD = "estafeta";
+	private static final String PASSWORD = "postgresql";
 
 	static Connection getConnection() {
 		Connection connection = null;

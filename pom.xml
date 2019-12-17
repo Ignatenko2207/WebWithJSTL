@@ -17,9 +17,8 @@
 		<junit.version>5.5.2</junit.version>
 		<lombok.version>1.18.10</lombok.version>
 		<postgres.jdbc.version>42.2.8</postgres.jdbc.version>
-		<javax.servlet.version>4.0.1</javax.servlet.version>
-		<javax.servlet.jstl.version>1.2</javax.servlet.jstl.version>
-		<javax.servlet.jsp-api.version>2.3.3</javax.servlet.jsp-api.version>
+		<commons-dbcp.version>1.4</commons-dbcp.version>
+		<servlet.version>4.0.1</servlet.version>
 	</properties>
 
 	<dependencies>
@@ -57,23 +56,23 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>${javax.servlet.version}</version>
-			<scope>provided</scope>
+			<version>${servlet.version}</version>
 		</dependency>
 
+		<!-- Apache Commons dbcp -->
+		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+			<version>${commons-dbcp.version}</version>
+		</dependency>
+
+		<!-- JSTL -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
-			<version>${javax.servlet.jstl.version}</version>
+			<version>1.2</version>
 		</dependency>
 
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>javax.servlet.jsp-api</artifactId>
-			<version>${javax.servlet.jsp-api.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		
 	</dependencies>
 	<build>
 		<finalName>WebWithJSTLMA45</finalName>

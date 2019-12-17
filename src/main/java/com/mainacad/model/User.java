@@ -7,10 +7,9 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class User {
-  
     private Integer id;
     private String login;
     private String password;
@@ -27,6 +26,4 @@ public class User {
         this.email = email;
         this.phone = phone;
     }
-    
-    
 }
