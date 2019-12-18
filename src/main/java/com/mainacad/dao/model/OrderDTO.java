@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 public class OrderDTO {
-	private String itemId;
+	private Integer orderId;
+	private Integer itemId;
     private String itemName;
     private Integer itemPrice;
     private Integer amount;

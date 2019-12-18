@@ -12,11 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.mainacad.dao.ItemDAO;
 import com.mainacad.dao.UserDAO;
+import com.mainacad.dao.model.OrderDTO;
 import com.mainacad.model.Cart;
 import com.mainacad.model.Item;
 import com.mainacad.model.User;
 import com.mainacad.service.CartService;
 import com.mainacad.service.ItemService;
+import com.mainacad.service.OrderService;
 import com.mainacad.service.UserService;
 
 @SuppressWarnings("serial")
@@ -37,7 +39,7 @@ public class UserController extends HttpServlet {
 			User user = UserService.getByLoginAndPassword(login, password);
 			RequestDispatcher dispatcher;
 			if (user != null) {
-				List<Item> items = ItemDAO.getAllAvailable();
+				List<Item> items = ItemService.getAllAvailable();
 				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 				req.setAttribute("user", user);
 				req.setAttribute("itemCollection", items);
@@ -77,9 +79,11 @@ public class UserController extends HttpServlet {
 			if (user != null) {
 				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 				req.setAttribute("cart", cart);
-				List<Item> items = ItemDAO.getAllAvailable();
+				List<OrderDTO> orderDTOS = OrderService.getAllDTOByCard(cart); ////
+				List<Item> items = ItemService.getAllAvailable();
 				req.setAttribute("user", user);
 				req.setAttribute("itemCollection", items);
+				req.setAttribute("orderDTOCollection", orderDTOS); //////
 				
 				
 			} else {

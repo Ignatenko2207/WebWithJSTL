@@ -1,6 +1,11 @@
 package com.mainacad.dao;
 
+import com.mainacad.dao.model.OrderDTO;
 import com.mainacad.model.*;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,7 +144,29 @@ public class OrderDAO {
         }
     }
 
-    // TODO test
+    public static List<OrderDTO> getAllDTOByCard(Cart cart) {
+    	String sql = "SELECT *, o.id as order_id, o.amount "
+    			+ "FROM orders o "
+    			+ "JOIN items i ON i.id=o.item_id " +
+                "WHERE o.cart_id=?";
+    	List<OrderDTO> orderDTOS = new ArrayList<>();
+        try ( Connection connection = ConnectionToDB.getConnection();
+              PreparedStatement preparedStatement =
+                      connection.prepareStatement(sql);
+        ) {
+            preparedStatement.setInt(1, cart.getId());
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while(resultSet.next()) {
+                OrderDTO orderDTO = new OrderDTO(resultSet.getInt("order_id"), resultSet.getInt("item_id"), resultSet.getString("name"), resultSet.getInt("price"), resultSet.getInt("amount"));
+                orderDTOS.add(orderDTO);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return orderDTOS;
+    }
+    	
     public static Order updateAmount(Order order, Integer amount) {
         String sql = "UPDATE orders SET " +
                 "amount=? "+
@@ -161,3 +188,5 @@ public class OrderDAO {
         return null;
     }
 }
+
+

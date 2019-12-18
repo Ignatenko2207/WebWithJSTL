@@ -1,5 +1,6 @@
 package com.mainacad.dao;
 
+import com.mainacad.dao.model.OrderDTO;
 import com.mainacad.model.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -195,5 +196,52 @@ class OrderDAOTest {
         assertNotNull(targetOrder);
         
         assertEquals(100, targetOrder.getAmount());
+    }
+    
+    @Test
+    void getAllDTOByCard() {
+        User user = new User("login0", "pass0", "first_name0", "last_name0", "email0", "phone0");
+        UserDAO.save(user);
+        users.add(user);
+        assertNotNull(user.getId());
+
+        Cart cart = new Cart(Status.OPEN, user, CURRENT_TIME);
+        Cart cartNotOk = new Cart(Status.OPEN, user, CURRENT_TIME);
+        CartDAO.save(cart);
+        CartDAO.save(cartNotOk);
+        carts.add(cart);
+        carts.add(cartNotOk);
+        assertNotNull(cart.getId());
+        assertNotNull(cartNotOk.getId());
+
+        Item item = new Item("name_5", "code_5", 50, 500);
+        ItemDAO.save(item);
+        items.add(item);
+        assertNotNull(item.getId());
+
+        Order order1 = new Order(item, cart, 50);
+        Order order2 = new Order(item, cart, 50);
+        Order order3 = new Order(item, cartNotOk, 50);
+        OrderDAO.save(order1);
+        OrderDAO.save(order2);
+        OrderDAO.save(order3);
+        orders.add(order1);
+        orders.add(order2);
+        orders.add(order3);
+        assertNotNull(order1.getId());
+        assertNotNull(order2.getId());
+        assertNotNull(order3.getId());
+       
+        List<OrderDTO> targetOrderDTOS = OrderDAO.getAllDTOByCard(cart);
+        assertTrue(targetOrderDTOS.size() >= 2);
+
+        int count = 0;
+        for (OrderDTO each:targetOrderDTOS){
+            if ((order1.getId()).equals(each.getOrderId())) {count++;}
+            if ((order2.getId()).equals(each.getOrderId())) {count++;}
+            if ((order3.getId()).equals(each.getOrderId())) {count++;}
+        }
+        assertEquals(2,count);
+
     }
 }
