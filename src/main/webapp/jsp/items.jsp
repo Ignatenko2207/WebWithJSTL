@@ -16,7 +16,7 @@
 	<input hidden="true" name="itemId" value="${item.id}">
 	<c:out value="${item.name} ${item.price}" />
 	<input type="submit" value="buy">
-	<form>	
+	</form>	
 	<br>
 </c:forEach>
 </body>
