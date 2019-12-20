@@ -7,6 +7,7 @@
 <body>
 	<h3>Carts:</h3>
 
+	<!-- Back to items -->
 	<form action="item" method="post">
 		<input type="text" name="action" value="to-items" hidden> <input
 			hidden="true" name="userId" value="${user.id}"> <input
@@ -15,16 +16,29 @@
 	<br>
 	<br>
 
-	<br>
-	<c:forEach items="${cartCollection}" var="cart">
-		<form action="cart" method="post">
-			<input type="text" name="action" value="open-cart-from-list" hidden>
-			<input hidden="true" name="userId" value="${user.id}"> <input
-				hidden="true" name="cartId" value="${cart.id}">
-			<c:out value="${cart.id} ${cart.status}" />
-			<input type="submit" value="open">
-		</form>
-	</c:forEach>
-
+	<!-- Table of carts  -->
+	<table>
+		<!-- here should go some titles... -->
+		<tr>
+			<th>ID</th>
+			<th>STATUS</th>
+		</tr>
+		<c:forEach items="${cartCollection}" var="cart">
+			<form action="cart" method="post">
+			<tr>
+				<td><c:out value="${cart.id}" /></td>
+				<td><c:out value="${cart.status}" /></td>
+				<td><input type="text" name="action"
+					value="open-cart-from-list" hidden></td>
+				<td><input hidden="true" name="userId" value="${user.id}">
+				</td>
+				<td><input hidden="true" name="cartId" value="${cart.id}">
+				</td>
+				<td><input type="submit" value="open"></td>
+			</tr>
+			</form>
+		</c:forEach>
+	</table>
+	
 </body>
 </html>

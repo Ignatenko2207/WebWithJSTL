@@ -29,29 +29,32 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
+		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
+		RequestDispatcher dispatcher;
 		String action = req.getParameter("action");
+		System.out.print("11111111111111111111111111111111");
 
 		if (action.equals("login")) {
 			String login = req.getParameter("login");
 			String password = req.getParameter("password");
 
 			User user = UserService.getByLoginAndPassword(login, password);
-			RequestDispatcher dispatcher;
 			if (user != null) {
 				req.setAttribute("user", user);
 				List<Item> items = ItemService.getAllAvailable();
 				req.setAttribute("itemCollection", items);
-				
-				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 
+				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 			} else {
 				req.setAttribute("errorMsg", "Login or password are wrong!");
-				
+
 				dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");
 			}
 			dispatcher.forward(req, resp);
 		} else if (action.equals("register")) {
+			System.out.print("dfddddddddddddddddddddddddddddddddddddddd");
+			
 			String login = req.getParameter("login");
 			String password = req.getParameter("password");
 			String firstName = req.getParameter("fname");
@@ -60,15 +63,17 @@ public class UserController extends HttpServlet {
 			String phone = req.getParameter("phone");
 			User user = new User(login, password, firstName, lastName, email, phone);
 
-			User savedUser = UserDAO.save(user);
-			RequestDispatcher dispatcher;
+			User savedUser = UserService.save(user);
+			
 			if (savedUser.getId() != null) {
-				dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
 				req.setAttribute("user", savedUser);
+				List<Item> items = ItemService.getAllAvailable();
+				req.setAttribute("itemCollection", items);
+
+				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 			} else {
-				// TODO
-				dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
 				req.setAttribute("errorMsg", "Problem with registration!");
+				dispatcher = req.getRequestDispatcher("/jsp/registration.jsp");
 			}
 			dispatcher.forward(req, resp);
 		}

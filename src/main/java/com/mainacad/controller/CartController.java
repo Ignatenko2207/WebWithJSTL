@@ -30,6 +30,7 @@ public class CartController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
+		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
 
 		RequestDispatcher dispatcher;
 		Integer userIdSelected = Integer.valueOf(req.getParameter("userId"));

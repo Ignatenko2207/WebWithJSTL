@@ -13,5 +13,7 @@ public class UserService {
 		return UserDAO.getById(id);
 	}
 	
-	
+	public static User save(User user) {
+		return UserDAO.save(user);
+	}	
 }

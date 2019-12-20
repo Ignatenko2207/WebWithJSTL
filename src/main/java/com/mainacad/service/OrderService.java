@@ -13,19 +13,23 @@ public class OrderService {
 		return OrderDAO.save(order);
 	}
 
+	public static Order getById(Integer id) {
+		return OrderDAO.getById(id);
+	}
+	
 	public static List<Order> getAllByCart(Cart cart) {
 		return OrderDAO.getAllByCart(cart);
 	}
 
-	public static Order getByCartWithItem(Cart cart, Item item) {
+	public static Integer getByCartWithItem(Cart cart, Item item) {
 		List<Order> orders = getAllByCart(cart);
 
 		if (orders.isEmpty()) {
 			return null;
 		} else {
 			for (Order each : orders) {
-				if (each.getItem().equals(item)) {
-					return each;
+				if (each.getItem().getId().equals(item.getId())) {
+					return each.getId();
 				}
 			}
 		}
