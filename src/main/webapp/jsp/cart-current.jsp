@@ -12,6 +12,14 @@
 	</form>
 	<br>
 	<br>
+		<form action="item" method="post">
+		<input type="text" name="action" value="to-items" hidden> <input
+			hidden="true" name="userId" value="${user.id}"> <input
+			type="submit" value="Back to items">
+	</form>
+	<br>
+	<br>
+	
 	<h3>
 		Cart, id =
 		<c:out value="${cart.id} ${cart.status}" />

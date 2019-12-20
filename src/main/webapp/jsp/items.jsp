@@ -31,7 +31,7 @@
 
 	<c:if test="${cart != null}">
 		<h3>
-			<br> Cart:
+			<br> Your item is added to cart with id=:
 			<c:out value="${cart.id}" />
 		</h3>
 

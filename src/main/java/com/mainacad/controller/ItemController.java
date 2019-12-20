@@ -38,7 +38,7 @@ public class ItemController extends HttpServlet {
 		if (action.equals("add-item-in-cart")) {
 			Integer itemIdSelected = Integer.valueOf(req.getParameter("itemId"));
 			Item item = ItemService.getById(itemIdSelected);
-			if (item != null) { 
+			if (item != null) {
 				Cart cart = CartService.addItem(user, item);
 				req.setAttribute("cart", cart);
 
@@ -66,12 +66,12 @@ public class ItemController extends HttpServlet {
 
 			dispatcher = req.getRequestDispatcher("/jsp/cart-current.jsp");
 			dispatcher.forward(req, resp);
-		} else if (action.equals("back-to-items")) {
+		} else if (action.equals("to-items")) {
 			req.setAttribute("user", user);
 			List<Item> items = ItemService.getAllAvailable();
 			req.setAttribute("itemCollection", items);
 
-			dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
+			dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 			dispatcher.forward(req, resp);
 		}
 	}
