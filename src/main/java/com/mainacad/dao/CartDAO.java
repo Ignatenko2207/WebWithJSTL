@@ -1,6 +1,6 @@
 package com.mainacad.dao;
 
-import com.mainacad.dao.model.CartDTO;
+import com.mainacad.dao.model.CartSumDTO;
 import com.mainacad.model.Cart;
 import com.mainacad.model.Status;
 import com.mainacad.model.User;
@@ -167,7 +167,7 @@ public class CartDAO {
         }
     }
 
-    public static List<CartDTO> getItemsSumGroupedByUser(Long timeFrom, Long timeTo){
+    public static List<CartSumDTO> getItemsSumGroupedByUser(Long timeFrom, Long timeTo){
         String sql = "SELECT u.login, SUM(o.amount * i.price) as sum_items, MIN(c.creation_time) as creat_time FROM carts c " +
                 "JOIN users u ON c.user_id = u.id " +
                 "JOIN orders o ON c.id = o.cart_id " +
@@ -175,7 +175,7 @@ public class CartDAO {
                 "WHERE c.creation_time >= ? AND c.creation_time <= ? AND c.status = 2 " +
                 "GROUP BY u.login " +
                 "ORDER BY MIN(c.creation_time)";
-        List<CartDTO> cartDTOS = new ArrayList<>();
+        List<CartSumDTO> cartDTOS = new ArrayList<>();
         try ( Connection connection = ConnectionToDB.getConnection();
               PreparedStatement preparedStatement =
                       connection.prepareStatement(sql);
@@ -185,7 +185,7 @@ public class CartDAO {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()) {
-                CartDTO cartDTO = new CartDTO(
+                CartSumDTO cartDTO = new CartSumDTO(
                         resultSet.getString("login"),
                         resultSet.getInt("sum_items"),
                         resultSet.getLong("creat_time")

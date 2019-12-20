@@ -39,13 +39,16 @@ public class UserController extends HttpServlet {
 			User user = UserService.getByLoginAndPassword(login, password);
 			RequestDispatcher dispatcher;
 			if (user != null) {
-				List<Item> items = ItemService.getAllAvailable();
-				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
 				req.setAttribute("user", user);
+				List<Item> items = ItemService.getAllAvailable();
 				req.setAttribute("itemCollection", items);
+				
+				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
+
 			} else {
-				dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");
 				req.setAttribute("errorMsg", "Login or password are wrong!");
+				
+				dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");
 			}
 			dispatcher.forward(req, resp);
 		} else if (action.equals("register")) {
@@ -63,32 +66,9 @@ public class UserController extends HttpServlet {
 				dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
 				req.setAttribute("user", savedUser);
 			} else {
+				// TODO
 				dispatcher = getServletContext().getRequestDispatcher("/jsp/items.jsp");
-				req.setAttribute("errorMsg", "Login or password are wrong!");
-			}
-			dispatcher.forward(req, resp);
-		} else if (action.equals("add-item-in-cart")) {
-			Integer userIdSelected = Integer.valueOf(req.getParameter("userId"));
-			Integer itemIdSelected = Integer.valueOf(req.getParameter("itemId"));
-
-			User user = UserService.getById(userIdSelected);
-			Item item = ItemService.getById(itemIdSelected);
-			Cart cart = CartService.addItem(user, item);
-
-			RequestDispatcher dispatcher;
-			if (user != null) {
-				dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
-				req.setAttribute("cart", cart);
-				List<OrderDTO> orderDTOS = OrderService.getAllDTOByCard(cart); ////
-				List<Item> items = ItemService.getAllAvailable();
-				req.setAttribute("user", user);
-				req.setAttribute("itemCollection", items);
-				req.setAttribute("orderDTOCollection", orderDTOS); //////
-				
-				
-			} else {
-                dispatcher = req.getRequestDispatcher("/jsp/items.jsp");
-				req.setAttribute("errorMsg", "Login or password are wrong!");
+				req.setAttribute("errorMsg", "Problem with registration!");
 			}
 			dispatcher.forward(req, resp);
 		}

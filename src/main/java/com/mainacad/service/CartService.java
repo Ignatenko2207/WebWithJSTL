@@ -1,6 +1,7 @@
 package com.mainacad.service;
 
 import java.util.Date;
+import java.util.List;
 
 import com.mainacad.dao.CartDAO;
 import com.mainacad.model.Cart;
@@ -30,5 +31,17 @@ public class CartService {
 		}
 		else {OrderService.updateAmount(order, order.getAmount()+1);}		
 		return cart;
+	}
+	
+	public static Cart getByUserAndOpenStatus(User user) {
+		return CartDAO.getByUserAndOpenStatus(user);
+	}
+	
+	public static Cart getById(Integer id) {
+		return CartDAO.getById(id);
+	}
+	
+	public static List<Cart> getAllByUserAndPeriod(User user) {
+		return CartDAO.getAllByUserAndPeriod(user, 0L, Long.MAX_VALUE);
 	}
 }

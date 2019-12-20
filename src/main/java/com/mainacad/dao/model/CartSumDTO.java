@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class CartDTO {
+public class CartSumDTO {
     private String userLogin;
     private Integer sumItems;
     private Long creationTime;

@@ -1,6 +1,6 @@
 package com.mainacad.dao;
 
-import com.mainacad.dao.model.CartDTO;
+import com.mainacad.dao.model.CartSumDTO;
 import com.mainacad.dao.model.ItemDTO;
 import com.mainacad.model.*;
 import com.mainacad.model.Order;
@@ -277,7 +277,7 @@ class CartDAOTest {
         assertNotNull(order7.getId());
         assertNotNull(order8.getId());
 
-        List<CartDTO> cartDTOS = CartDAO.getItemsSumGroupedByUser(periodFrom, periodTo);
+        List<CartSumDTO> cartDTOS = CartDAO.getItemsSumGroupedByUser(periodFrom, periodTo);
         assertTrue(cartDTOS.size() >= 2);
 
 //        CartDTO cartDTO1 = new CartDTO("login_1", 83, CURRENT_TIME - 50);
@@ -286,7 +286,7 @@ class CartDAOTest {
         boolean isInCollectionRecord1 = false;
         boolean isInCollectionRecord2 = false;
 
-        for (CartDTO each : cartDTOS) {
+        for (CartSumDTO each : cartDTOS) {
             if (each.getUserLogin().equals("login_1")
                     && (each.getSumItems().equals(110))
                     && (each.getCreationTime().equals(12345679L))) {
