@@ -29,12 +29,12 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("UTF-8");
 		resp.setCharacterEncoding("UTF-8");
-		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-
+//		resp.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+		resp.setHeader("Cache-Control", "no-store");
+		
 		RequestDispatcher dispatcher;
 		String action = req.getParameter("action");
-		System.out.print("11111111111111111111111111111111");
-
+		
 		if (action.equals("login")) {
 			String login = req.getParameter("login");
 			String password = req.getParameter("password");
@@ -52,9 +52,7 @@ public class UserController extends HttpServlet {
 				dispatcher = req.getRequestDispatcher("/jsp/wrong-auth.jsp");
 			}
 			dispatcher.forward(req, resp);
-		} else if (action.equals("register")) {
-			System.out.print("dfddddddddddddddddddddddddddddddddddddddd");
-			
+		} else if (action.equals("register")) {			
 			String login = req.getParameter("login");
 			String password = req.getParameter("password");
 			String firstName = req.getParameter("fname");
