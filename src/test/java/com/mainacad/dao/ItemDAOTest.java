@@ -35,6 +35,7 @@ class ItemDAOTest {
         items.forEach(it -> ItemDAO.delete(it.getId()));
     }
 
+
     @Test
     void saveTest() {
         Item item = new Item("name_0", "code_0", 1, 10);
@@ -207,14 +208,15 @@ class ItemDAOTest {
     void getAndDeleteTest() {
         Item item = new Item("name_7", "code_7", 70, 700);
         ItemDAO.save(item);
-        items.add(item);
         assertNotNull(item.getId());
 
         Item targetItem = ItemDAO.getById(item.getId());
         assertNotNull(targetItem);
-        ItemDAO.delete(targetItem.getId());
-        targetItem = ItemDAO.getById(item.getId());
-        assertNull(targetItem);
+
+        ItemDAO.delete(item.getId());
+
+        Item deletedItem = ItemDAO.getById(targetItem.getId());
+        assertNull(deletedItem);
     }
 }
 

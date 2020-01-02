@@ -181,7 +181,6 @@ class CartDAOTest {
 
         Cart cart = new Cart(Status.OPEN, user, CURRENT_TIME);
         CartDAO.save(cart);
-        carts.add(cart);
         assertNotNull(cart.getId());
 
         Cart targetCart = CartDAO.getById(cart.getId());
@@ -279,9 +278,6 @@ class CartDAOTest {
 
         List<CartSumDTO> cartDTOS = CartDAO.getItemsSumGroupedByUser(periodFrom, periodTo);
         assertTrue(cartDTOS.size() >= 2);
-
-//        CartDTO cartDTO1 = new CartDTO("login_1", 83, CURRENT_TIME - 50);
-//        CartDTO cartDTO2 = new CartDTO("login_2", 770, CURRENT_TIME - 60);
 
         boolean isInCollectionRecord1 = false;
         boolean isInCollectionRecord2 = false;

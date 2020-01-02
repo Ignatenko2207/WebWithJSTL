@@ -24,7 +24,8 @@ class UserDAOTest {
         users.forEach(it -> UserDAO.delete(it.getId()));
     }
 
-    @Test
+
+@Test
     void save() {
         User user = new User("testLogin", "testPass", "testName", "testLastName", "testEmail", "123456789");
         UserDAO.save(user);
