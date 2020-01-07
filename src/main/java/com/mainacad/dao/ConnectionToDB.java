@@ -12,7 +12,7 @@ class ConnectionToDB {
 	
 	private static final String USER = "postgres";
 	
-	private static final String PASSWORD = "248842";
+	private static final String PASSWORD = "cdtnf1986";
 
 	static Connection getConnection() {
 		
