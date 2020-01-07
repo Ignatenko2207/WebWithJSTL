@@ -38,14 +38,12 @@ public class UserDAO {
                     user.setId(id);
                     break;
                 }
-            }
-            else {
-                return null;
+                return user;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return user;
+        return null;
     }
 
     public static List<User> getAll() {

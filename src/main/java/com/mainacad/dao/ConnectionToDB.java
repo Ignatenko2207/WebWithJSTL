@@ -9,9 +9,11 @@ class ConnectionToDB {
 	private static final Logger LOG = Logger.getLogger(ConnectionToDB.class.getName());
 	private static final String URL = "jdbc:postgresql://localhost:5432/e_shop";
 	private static final String USER = "postgres";
-	private static final String PASSWORD = "248842";
+	private static final String PASSWORD = "ghbdtn";
+	
 
 	static Connection getConnection() {
+		
 		Connection connection = null;
 		try {
 			Class.forName("org.postgresql.Driver");
