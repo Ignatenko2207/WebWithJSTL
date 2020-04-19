@@ -18,7 +18,7 @@
     </form>
 <br>
     <h3>
-        <a href="/WebWithJSTLMA45/jsp/registration.jsp">REGISTER NEW USER</a>
+        <a href="/WebWithJSTLMA45_war/jsp/registration.jsp">REGISTER NEW USER</a>
     </h3>
 </body>
 </html>

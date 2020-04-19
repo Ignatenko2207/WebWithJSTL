@@ -26,7 +26,7 @@
 
 <br>
 <h3>
-    <a href="/WebWithJSTLMA45/index.jsp">GO BACK!</a>
+    <a href="/WebWithJSTLMA45_war/index.jsp">GO BACK!</a>
 </h3>
 
 	<h2><c:out value="${errorMsg}"/></h2>
